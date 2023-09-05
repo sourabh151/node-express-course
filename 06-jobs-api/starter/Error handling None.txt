@@ -1,0 +1,11 @@
+Error handling None
+Traceback (most recent call last):
+  File "D:\PROGRAMS\sublime_text_build_4126\Data\Installed Packages\LSP.sublime-package\plugin/core/sessions.py", line 1895, in on_payload
+    handler(result)
+  File "D:\PROGRAMS\SUBLIM~1\Data\Packages\LSP_UT~1\st3\lsp_utils\_client_handler\abstract_plugin.py", line 74, in <lambda>
+    Request(method, params), lambda result: handler(result, False), lambda result: handler(result, True))
+  File "D:\PROGRAMS\sublime_text_build_4126\Data\Installed Packages\LSP-typescript.sublime-package\plugin.py", line 93, in <lambda>
+    lambda result, is_error: self._on_inlay_hints_async(result, is_error, session_buffer))
+  File "D:\PROGRAMS\sublime_text_build_4126\Data\Installed Packages\LSP-typescript.sublime-package\plugin.py", line 100, in _on_inlay_hints_async
+    view = next(iter(session_buffer.session_views)).view
+StopIteration

@@ -345,7 +345,9 @@ h5 + h5 {
   color: var(--red-dark);
   text-transform: capitalize;
 }
-.alert-danger {
-  width: 600px;
+.hidden{
+  display:none;
+}
+.alert-danger .alert-success {
   text-align: center;
 }

@@ -34,11 +34,13 @@
         </div>
 
         <button type="submit" class="block">Submit</button>
+        <div class="alertMsg hidden"></div>
       </form>
       <div class="result"></div>
     </main>
     <script>
       const result = document.querySelector(".result");
+      const alertMsg = document.querySelector(".alertMsg");
       const submit = document.querySelector("[type=submit]");
       const input = document.querySelector("#name");
 
@@ -53,7 +55,11 @@
             result.innerHTML = banner;
           }
         } catch (e) {
-          result.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`;
+          alertMsg.classList.toggle("hidden");
+          setTimeout(() => {
+            alertMsg.classList.toggle("hidden");
+          }, 1000);
+          alertMsg.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`;
         }
       }
       getData();
@@ -72,11 +78,29 @@
               "Content-Type": "application/json;charset=UTF-8",
             },
           };
-          const response = await fetch("/api/people", init);
-          console.log(await response.json());
-          await gatData();
+          let response = await fetch("/api/people", init);
+          response = await response.json();
+          // console.log(response);
+          if (!response.success) {
+            alertMsg.classList.toggle("hidden");
+            setTimeout(() => {
+              alertMsg.classList.toggle("hidden");
+            }, 1000);
+            alertMsg.innerHTML = `<div class="alert alert-danger">${response.msg}</div>`;
+          } else {
+            alertMsg.classList.toggle("hidden");
+            setTimeout(() => {
+              alertMsg.classList.toggle("hidden");
+            }, 1000);
+            alertMsg.innerHTML = `<div class="alert alert-success">${response.msg}</div>`;
+          }
+          getData();
         } catch (error) {
-          result.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`;
+          alertMsg.classList.toggle("hidden");
+          setTimeout(() => {
+            alertMsg.classList.toggle("hidden");
+          }, 1000);
+          alertMsg.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`;
         }
       });
     </script>

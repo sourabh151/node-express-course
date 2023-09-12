@@ -33,7 +33,6 @@ app.use(errorHandlerMiddleware);
 
 const start = async () => {
     try {
-    	// console.log(process.env);
         await connectDB(process.env.MONGO_URI);
         app.listen(port, () => { 
             console.log(`server is listening on port ${port}`);

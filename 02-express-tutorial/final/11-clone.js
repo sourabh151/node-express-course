@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const { people } = require("../data");
 const PORT = 5000;
-const {StatusCodes} = require('http-status-codes');
+const { StatusCodes } = require("http-status-codes");
 
 let MAXID = 0;
-people.every((v) => {
+people.forEach((v) => {
   MAXID = MAXID > Number(v.id) ? MAXID : Number(v.id);
 });
 //server static files from the folder
@@ -57,10 +57,13 @@ app.put("/api/people/:ID", (req, res) => {
         person.name = name;
       }
     });
-    return res.status(200).send({success:true,msg:`name with ID ${ID} modified to ${name}`});
+    return res
+      .status(200)
+      .send({ success: true, msg: `name with ID ${ID} modified to ${name}` });
   }
-  res.status(StatusCodes.BAD_REQUEST).send({success:false,msg:"please provide valid id"});
-
+  res
+    .status(StatusCodes.BAD_REQUEST)
+    .send({ success: false, msg: "please provide valid id" });
 });
 
 app.listen(PORT, () => {

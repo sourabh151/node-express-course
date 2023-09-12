@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { people } = require("../data");
+let { people } = require("../data");
 const PORT = 5000;
 const { StatusCodes } = require("http-status-codes");
 
@@ -65,6 +65,17 @@ app.put("/api/people/:ID", (req, res) => {
     .status(StatusCodes.BAD_REQUEST)
     .send({ success: false, msg: "please provide valid id" });
 });
+app.delete("/api/people/:ID",(req,res)=>{
+  const {ID} = req.params;
+  let prevLength = people.length;
+  people = people.filter((person)=>{
+    return (!(person.id === Number(ID)));
+});
+if(prevLength>people.length){
+  return res.status(200).send({success:true,msg:`person with id ${ID} deleted succesfully`});
+}
+res.status(400).send({success:false,msg:`please provide valid id`})
+})
 
 app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
